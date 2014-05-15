@@ -23,28 +23,27 @@ import {DefaultParametersTransformer} from './DefaultParametersTransformer';
 import {DestructuringTransformer} from './DestructuringTransformer';
 import {ForOfTransformer} from './ForOfTransformer';
 import {FreeVariableChecker} from '../semantics/FreeVariableChecker';
-import {GeneratorComprehensionTransformer} from
-    './GeneratorComprehensionTransformer';
+import {GeneratorComprehensionTransformer} from './GeneratorComprehensionTransformer';
 import {GeneratorTransformPass} from './GeneratorTransformPass';
 import {InlineModuleTransformer} from './InlineModuleTransformer';
+import {InstantiateModuleTransformer} from './InstantiateModuleTransformer';
+import {MiraiModuleTransformer} from './mirai/MiraiModuleTransformer';
 import {ModuleTransformer} from './ModuleTransformer';
 import {MultiTransformer} from './MultiTransformer';
 import {NumericLiteralTransformer} from './NumericLiteralTransformer';
 import {ObjectLiteralTransformer} from './ObjectLiteralTransformer';
 import {ObjectMap} from '../util/ObjectMap';
+import {options, transformOptions} from '../options';
 import {ParseTreeValidator} from '../syntax/ParseTreeValidator';
-import {PropertyNameShorthandTransformer} from
-    './PropertyNameShorthandTransformer';
-import {InstantiateModuleTransformer} from './InstantiateModuleTransformer';
+import {PropertyNameShorthandTransformer} from './PropertyNameShorthandTransformer';
 import {RestParameterTransformer} from './RestParameterTransformer';
 import {SpreadTransformer} from './SpreadTransformer';
 import {SymbolTransformer} from './SymbolTransformer';
 import {TemplateLiteralTransformer} from './TemplateLiteralTransformer';
-import {TypeTransformer} from './TypeTransformer';
 import {TypeAssertionTransformer} from './TypeAssertionTransformer';
 import {TypeToExpressionTransformer} from './TypeToExpressionTransformer';
+import {TypeTransformer} from './TypeTransformer';
 import {UniqueIdentifierGenerator} from './UniqueIdentifierGenerator';
-import {options, transformOptions} from '../options';
 
 /**
  * MultiTransformer built from global options settings
@@ -84,6 +83,9 @@ export class FromOptionsTransformer extends MultiTransformer {
 
     if (transformOptions.modules) {
       switch (transformOptions.modules) {
+        case 'mirai':
+          append(MiraiModuleTransformer);
+          break;
         case 'commonjs':
           append(CommonJsModuleTransformer);
           break;

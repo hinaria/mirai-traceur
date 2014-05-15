@@ -29,7 +29,7 @@ export var transformOptions = Object.create(null);
 
 var defaultValues = Object.create(null);
 var experimentalOptions = Object.create(null);
-var moduleOptions = ['amd', 'commonjs', 'instantiate', 'inline', 'register'];
+var moduleOptions = ['amd', 'commonjs', 'instantiate', 'inline', 'register', 'mirai'];
 
 export var options = {
 
