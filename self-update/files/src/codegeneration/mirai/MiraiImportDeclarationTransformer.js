@@ -32,8 +32,8 @@ export class MiraiImportDeclarationTransformer extends ParseTreeTransformer {
     // however this is not possible during a generic module transformation. we
     // do some post-processing here to fix that.
     //
-    //     __mirai__.require("module", moduleName, require(...))
-    //     => __mirai__.require("import", moduleName, require(...))
+    //     __mirai__.require("module", moduleName, require.resolve(...))
+    //     => __mirai__.require("import", moduleName, require.resolve(...))
     //
     // basically, we change the first param from "module" to "import" to mark
     // it as an import statement (instead of a module)
@@ -42,14 +42,14 @@ export class MiraiImportDeclarationTransformer extends ParseTreeTransformer {
         // tree:CallExpression -> args:ArgumentList -> args:Array
         var args = tree.args.args;
         var shouldTransform = 
+            // check that we are calling __mirai__.require()
             equals.member(tree.operand, "__mirai__.require")
 
             // check that its arguments list is like this: `require("module", friendlyName, require.resolve(...))`;
             && args.length == 3
             && (equals.literal(args[0], "module") || equals.literal(args[0], "\"module\""))
             && args[1] instanceof LiteralExpression
-            && args[2] instanceof CallExpression
-                && equals.member(args[2].operand, "require.resolve");
+            && args[2] instanceof CallExpression && equals.member(args[2].operand, "require.resolve");
 
         if (shouldTransform) {
             return createCallExpression(
