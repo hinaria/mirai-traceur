@@ -1,0 +1,27 @@
+{
+    "name": "mirai-traceur",
+    "description": "[mirai, traceur]",
+    "version": "0.0.41",
+    "main": "./src/node/api.js",
+    "homepage": "https://github.com/astralfoxy/mirai-traceur",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/astralfoxy/mirai-traceur"
+    },
+    "dependencies": {
+        "commander": ">=1.1",
+        "q-io": "~1.10.6",
+        "semver": "*"
+    },
+    "devDependencies": {
+        "source-map": "0.1.30",
+        "mocha": ">=1.9",
+        "chai": ">=1.5",
+        "node-uuid": ">=1.4",
+        "rsvp": "3.0.3",
+        "requirejs": "~2.1.9",
+        "semver": "2.2.1",
+        "traceur": "0.0.40",
+        "promises-aplus-tests": "~2.0.4"
+    }
+}
