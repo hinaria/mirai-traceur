@@ -1,4 +1,4 @@
-ensure that traceur does not includ eany new breaking api changes, especially to the module transformer.
+ensure that traceur does not include any new breaking api changes, especially to the module transformer.
 
 1. increment version number and dependencies
 2. copy new files over
